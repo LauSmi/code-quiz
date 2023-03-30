@@ -6,11 +6,11 @@ const progressBarFull = document.querySelector('#progressBarFull')
 const timerSpan = document.getElementById('timer')
 
 let currentQuestion = {}
-let acceptingAnswers = true
-let score = 0
-let questionCounter = 0
+let acceptingAnswers;
+let score;
+let questionCounter;
 let availableQuestions = []
-let startTime = 5
+let startTime = 60
 
 let questions = [
   {
@@ -59,14 +59,13 @@ startGame = () => {
 
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-    localStorage.setItem('mostREcentScore', score)
-
+    localStorage.setItem('mostRecentScore', score)
     return window.location.assign('/end.html')
   }
 
   questionCounter++
-  progressText.innertext = 'Question ${questionCounter} of $(MAX_QUESTIONS}'
-  progressBarFull.style.width = '${(questionCounter/MAX_QUESTIONS) * 100}%'
+  progressText.innertext = `Question ${questionCounter} of $(MAX_QUESTIONS}`
+  progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
   const questionsIndex = Math.floor(Math.random() * availableQuestions.length)
   currentQuestion = availableQuestions[questionsIndex]
@@ -95,6 +94,10 @@ choices.forEach((choice) => {
 
     if (classToApply === 'correct') {
       incrementScore(SCORE_POINTS)
+    } else {
+      // if classToApply is not equal to the string 'correct', then we know the 
+      // user selected the wrong answer, so now we deduct time from the timer
+      startTime = startTime - 10;
     }
 
     selectedChoice.parentElement.classList.add(classToApply)
@@ -111,30 +114,32 @@ incrementScore = (num) => {
   scoreText.innerText = score
 }
 
-startGame()
-
-
-/*function beginTimer() {
-// set my timer span to the current value of startTime
-timerSpan.textContent = `${startTime} seconds left in the quiz`
-let theIntervalId = setInterval(function () {
-  // if the start time equals zero, show something else
-  if (startTime <= 0) {
-    timerSpan.textContent = 'Times up! Game is over!'
-    clearInterval(theIntervalId)
-    console.log('The interval is cleared.')
-    // you may want to run some other function which clears the screen and display some other html
-    // when the time reaches zero. You need to think about that later.
-    // you would add that function call here
-    // i.e. showHighScores()
-    return null
-  }
-  // subtract one from the time
-  startTime--
-  // set the text content of my timerSpan to startTime
+function beginTimer() {
+  // set my timer span to the current value of startTime
   timerSpan.textContent = `${startTime} seconds left in the quiz`
-}, 1000)
-
+  let theIntervalId = setInterval(function () {
+    // if the start time equals zero, show something else
+    if (startTime <= 0) {
+      timerSpan.textContent = 'Times up! Game is over!'
+      clearInterval(theIntervalId)
+      localStorage.setItem('mostRecentScore', score)
+      // you may want to run some other function which clears the screen and display some other html
+      // when the time reaches zero. You need to think about that later.
+      // you would add that function call here
+      // i.e. showHighScores()
+      setTimeout(() => {
+        window.location.assign('/end.html')
+      }, 1000)
+      // return null
+    }
+    // subtract one from the time
+    startTime--
+    // set the text content of my timerSpan to startTime
+    timerSpan.textContent = `${startTime} seconds left in the quiz`
+  }, 1000)
+}
 
 // begin the timer when this JavaScript file is read by the browser
-beginTimer() */
+beginTimer()
+
+startGame()

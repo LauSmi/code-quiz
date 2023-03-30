@@ -14,7 +14,7 @@ Link to GitHub: https:
 
 # Usage:
 
-To play, you begin at the landing page, where you can choose to play or view the Highscores. When you click play, you will cycle through each of the four times questions. At the end you have to option to save your score and play again if you wish!
+To play, you begin at the landing page, where you can choose to Play or view the Highscores. When you click play, you will cycle through each of the four timed questions. If you answer incorrectly, time is deducted. At the end you have to option to save your score and play again if you wish!
 
 # Credits:
 
