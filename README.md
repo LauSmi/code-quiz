@@ -4,11 +4,17 @@
 
 For this assignment I built a four question quiz about JavaScript. It has a landing page, a separate page for each question, a timer, a score keeper, a page to enter your score and a leaderborad page. I had the assistance of a YouTube tutorial by Brian Design, as well as my tutor, James Compagnoni.
 
-Link to website: https:
+Link to website: https://lausmi.github.io/code-quiz/  
 
-Link to GitHub: https:
+Link to GitHub: https://github.com/LauSmi/code-quiz
 
 # Screenshot
+
+![Alt text](images/Screenshot%202023-03-30%20190635.png)
+
+![Alt text](images/Screenshot%202023-03-30%20190705.png)
+
+
 
 # Installation N/A
 
